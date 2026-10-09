@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de la directiva · {sitio}</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="assets/css/estilos.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%231d4ed8'/%3E%3Cpath d='M11 27 24 16l13 11v10a2 2 0 0 1-2 2h-8v-9h-6v9h-8a2 2 0 0 1-2-2z' fill='white'/%3E%3C/svg%3E">
+  <script src="config.js"></script>
+</head>
+<body>
+<main id="contenido">
+  <div class="contenedor">
+
+    <!-- ============================ ACCESO ============================ -->
+    <section id="acceso">
+      <h1 class="pagina-titulo">Panel de la directiva</h1>
+      <p class="pagina-bajada">Desde aquí se publican las noticias, las actividades y los documentos
+         que ven los vecinos. Solo la directiva debe conocer la clave.</p>
+
+      <form class="tarjeta" id="form-acceso" style="max-width:460px">
+        <div class="campo">
+          <label for="clave">Clave de acceso</label>
+          <input id="clave" name="clave" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="boton" type="submit">Entrar</button>
+        <div class="mensaje mensaje--error" id="error-acceso" hidden></div>
+      </form>
+
+      <div class="mensaje mensaje--info" style="max-width:640px">
+        <strong>Nota técnica para la evaluación:</strong> esta clave se valida en el navegador, por
+        lo que sirve para la demostración pero no constituye seguridad real. La versión productiva
+        requiere autenticación en el servidor (ver <code>README.md</code>).
+      </div>
+    </section>
+
+    <!-- ============================ PANEL ============================= -->
+    <section id="panel" hidden>
+      <div class="admin-cabecera">
+        <div>
+          <h1 class="pagina-titulo" style="margin-bottom:2px">Panel de la directiva</h1>
+          <p style="margin:0;color:#4b5563">Los cambios se ven de inmediato en el sitio público.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="boton boton--borde boton--pequeno" id="btn-restaurar" type="button">Restaurar contenido de ejemplo</button>
+          <button class="boton boton--borde boton--pequeno" id="btn-salir" type="button">Salir</button>
+        </div>
+      </div>
+
+      <div class="pestanas" role="tablist" aria-label="Secciones del panel">
+        <button role="tab" id="tab-noticias" aria-controls="p-noticias" aria-selected="true">Noticias</button>
+        <button role="tab" id="tab-actividades" aria-controls="p-actividades" aria-selected="false">Actividades</button>
+        <button role="tab" id="tab-documentos" aria-controls="p-documentos" aria-selected="false">Documentos</button>
+        <button role="tab" id="tab-ia" aria-controls="p-ia" aria-selected="false">Asistente de redacción (IA)</button>
+      </div>
+
+      <!-- ---------------------------- NOTICIAS ---------------------------- -->
+      <div class="panel" id="p-noticias" role="tabpanel" aria-labelledby="tab-noticias">
+        <form class="tarjeta" id="form-noticia">
+          <fieldset style="border:0;padding:0">
+            <legend style="padding:0;margin-bottom:12px" id="titulo-form-noticia">Publicar una noticia</legend>
+            <input type="hidden" name="id">
+            <div class="campo">
+              <label for="n-titulo">Título</label>
+              <input id="n-titulo" name="titulo" type="text" required>
+            </div>
+            <div class="rejilla rejilla--2">
+              <div class="campo">
+                <label for="n-fecha">Fecha de publicación</label>
+                <input id="n-fecha" name="fecha" type="date" required>
+              </div>
+              <div class="campo">
+                <label for="n-destacada">¿Destacar en la portada?</label>
+                <select id="n-destacada" name="destacada">
+                  <option value="no">No</option>
+                  <option value="si">Sí</option>
+                </select>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="n-resumen">Resumen <span class="ayuda">(2 o 3 líneas; es lo que se ve en la portada)</span></label>
+              <textarea id="n-resumen" name="resumen" style="min-height:90px" required></textarea>
+            </div>
+            <div class="campo">
+              <label for="n-cuerpo">Texto completo <span class="ayuda">(opcional; deja una línea en blanco entre párrafos)</span></label>
+              <textarea id="n-cuerpo" name="cuerpo"></textarea>
+            </div>
+            <button class="boton" type="submit">Guardar noticia</button>
+            <button class="boton boton--borde" type="button" data-cancelar="form-noticia">Cancelar edición</button>
+          </fieldset>
+        </form>
+        <div class="tabla-lista" id="lista-admin-noticias"></div>
+      </div>
+
+      <!-- -------------------------- ACTIVIDADES --------------------------- -->
+      <div class="panel" id="p-actividades" role="tabpanel" aria-labelledby="tab-actividades" hidden>
+        <form class="tarjeta" id="form-actividad">
+          <fieldset style="border:0;padding:0">
+            <legend style="padding:0;margin-bottom:12px" id="titulo-form-actividad">Agendar una actividad</legend>
+            <input type="hidden" name="id">
+            <div class="campo">
+              <label for="a-titulo">Nombre de la actividad</label>
+              <input id="a-titulo" name="titulo" type="text" required>
+            </div>
+            <div class="rejilla rejilla--3">
+              <div class="campo">
+                <label for="a-fecha">Fecha</label>
+                <input id="a-fecha" name="fecha" type="date" required>
+              </div>
+              <div class="campo">
+                <label for="a-hora">Hora</label>
+                <input id="a-hora" name="hora" type="time">
+              </div>
+              <div class="campo">
+                <label for="a-lugar">Lugar</label>
+                <input id="a-lugar" name="lugar" type="text">
+              </div>
+            </div>
+            <div class="campo">
+              <label for="a-detalle">Detalle</label>
+              <textarea id="a-detalle" name="detalle" style="min-height:90px"></textarea>
+            </div>
+            <button class="boton" type="submit">Guardar actividad</button>
+            <button class="boton boton--borde" type="button" data-cancelar="form-actividad">Cancelar edición</button>
+          </fieldset>
+        </form>
+        <div class="tabla-lista" id="lista-admin-actividades"></div>
+      </div>
+
+      <!-- --------------------------- DOCUMENTOS --------------------------- -->
+      <div class="panel" id="p-documentos" role="tabpanel" aria-labelledby="tab-documentos" hidden>
+        <div class="mensaje mensaje--info">
+          Primero sube el archivo PDF a la carpeta <code>documentos/</code> del sitio (o vuelve a
+          publicar el sitio con el archivo dentro) y luego regístralo aquí con su nombre exacto.
+        </div>
+        <form class="tarjeta" id="form-documento">
+          <fieldset style="border:0;padding:0">
+            <legend style="padding:0;margin-bottom:12px" id="titulo-form-documento">Registrar un documento</legend>
+            <input type="hidden" name="id">
+            <div class="campo">
+              <label for="d-titulo">Título del documento</label>
+              <input id="d-titulo" name="titulo" type="text" required>
+            </div>
+            <div class="campo">
+              <label for="d-descripcion">Descripción breve</label>
+              <input id="d-descripcion" name="descripcion" type="text">
+            </div>
+            <div class="rejilla rejilla--3">
+              <div class="campo">
+                <label for="d-archivo">Ruta del archivo</label>
+                <input id="d-archivo" name="archivo" type="text" placeholder="documentos/acta-octubre-2026.pdf" required>
+              </div>
+              <div class="campo">
+                <label for="d-tipo">Formato</label>
+                <select id="d-tipo" name="tipo">
+                  <option>PDF</option>
+                  <option>DOC</option>
+                  <option>XLS</option>
+                  <option>IMG</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label for="d-fecha">Fecha de publicación</label>
+                <input id="d-fecha" name="fecha" type="date">
+              </div>
+            </div>
+            <button class="boton" type="submit">Guardar documento</button>
+            <button class="boton boton--borde" type="button" data-cancelar="form-documento">Cancelar edición</button>
+          </fieldset>
+        </form>
+        <div class="tabla-lista" id="lista-admin-documentos"></div>
+      </div>
+
+      <!-- ------------------------------ IA -------------------------------- -->
+      <div class="panel" id="p-ia" role="tabpanel" aria-labelledby="tab-ia" hidden>
+        <div class="rejilla rejilla--2">
+          <form class="tarjeta" id="form-ia">
+            <div class="campo">
+              <label for="ia-tarea">¿Qué necesitas?</label>
+              <select id="ia-tarea" name="tarea">
+                <option value="comunicado">Redactar un comunicado formal</option>
+                <option value="resumen">Resumir un documento extenso</option>
+                <option value="citacion">Redactar una citación a asamblea</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="ia-entrada" id="ia-etiqueta">Cuéntalo con tus palabras</label>
+              <textarea id="ia-entrada" name="entrada" style="min-height:190px" required></textarea>
+            </div>
+            <button class="boton boton--verde" type="submit" id="ia-enviar">Generar borrador</button>
+          </form>
+
+          <div>
+            <span class="etiqueta-origen" id="ia-origen" hidden></span>
+            <div class="ia-salida" id="ia-salida">El borrador aparecerá aquí. Revísalo y corrígelo
+              antes de publicarlo: la directiva es siempre responsable del texto final.</div>
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="boton boton--borde boton--pequeno" id="ia-copiar" type="button">Copiar texto</button>
+              <button class="boton boton--borde boton--pequeno" id="ia-a-noticia" type="button">Usar como borrador de noticia</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="assets/js/plantilla.js"></script>
+<script src="assets/js/datos.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

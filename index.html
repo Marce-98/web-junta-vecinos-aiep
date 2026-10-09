@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio · {sitio}</title>
+  <meta name="description" content="Sitio oficial de la junta de vecinos: noticias, calendario de actividades y documentos oficiales en un solo lugar.">
+  <link rel="stylesheet" href="assets/css/estilos.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%231d4ed8'/%3E%3Cpath d='M11 27 24 16l13 11v10a2 2 0 0 1-2 2h-8v-9h-6v9h-8a2 2 0 0 1-2-2z' fill='white'/%3E%3C/svg%3E">
+  <script src="config.js"></script>
+</head>
+<body>
+
+<section class="portada">
+  <div class="contenedor">
+    <h1 id="portada-titulo">Información vecinal clara, en un solo lugar</h1>
+    <p>Aquí publicamos las noticias del sector, el calendario de actividades y los documentos
+       oficiales de la organización, para que cualquier vecino pueda informarse desde su
+       celular o computador, a cualquier hora.</p>
+    <div class="portada__acciones">
+      <a class="boton boton--claro" href="noticias.html">Ver noticias</a>
+      <a class="boton boton--claro" href="actividades.html">Próximas actividades</a>
+      <a class="boton boton--claro" href="documentos.html">Documentos oficiales</a>
+    </div>
+  </div>
+</section>
+
+<main id="contenido">
+  <div class="contenedor">
+
+    <div class="aviso">
+      <strong>¿Necesitas contactar a la directiva?</strong>
+      Puedes escribirnos por el <a href="contacto.html">formulario de contacto</a> o acercarte a la
+      sede en el horario de atención publicado al final de esta página.
+    </div>
+
+    <section class="seccion">
+      <div class="seccion__titulo">
+        <h2>Últimas noticias</h2>
+        <a href="noticias.html">Ver todas las noticias →</a>
+      </div>
+      <div class="rejilla rejilla--3" id="ultimas-noticias"></div>
+    </section>
+
+    <section class="seccion">
+      <div class="seccion__titulo">
+        <h2>Próximas actividades</h2>
+        <a href="actividades.html">Ver el calendario completo →</a>
+      </div>
+      <div class="rejilla" id="proximas-actividades"></div>
+    </section>
+
+    <section class="seccion">
+      <div class="seccion__titulo">
+        <h2>Directiva vigente</h2>
+      </div>
+      <div class="rejilla rejilla--3" id="directiva"></div>
+    </section>
+
+  </div>
+</main>
+
+<script src="assets/js/plantilla.js"></script>
+<script src="assets/js/datos.js"></script>
+<script src="assets/js/paginas.js"></script>
+<script>
+  // El título de la portada usa el lema definido en config.js
+  document.getElementById("portada-titulo").textContent = window.CONFIG.lema;
+</script>
+</body>
+</html>

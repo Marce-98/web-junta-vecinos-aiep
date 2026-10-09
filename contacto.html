@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto · {sitio}</title>
+  <meta name="description" content="Escribe a la directiva de la junta de vecinos: dudas, solicitudes y reclamos del sector.">
+  <link rel="stylesheet" href="assets/css/estilos.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%231d4ed8'/%3E%3Cpath d='M11 27 24 16l13 11v10a2 2 0 0 1-2 2h-8v-9h-6v9h-8a2 2 0 0 1-2-2z' fill='white'/%3E%3C/svg%3E">
+  <script src="config.js"></script>
+</head>
+<body>
+<main id="contenido">
+  <div class="contenedor">
+    <h1 class="pagina-titulo">Contacto con la directiva</h1>
+    <p class="pagina-bajada">Completa el formulario y se abrirá tu aplicación de correo con el
+       mensaje ya escrito. También puedes acercarte a la sede en el horario de atención.</p>
+
+    <div class="rejilla rejilla--2">
+      <form class="tarjeta" id="form-contacto" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre y apellido</label>
+          <input id="nombre" name="nombre" type="text" required autocomplete="name">
+        </div>
+        <div class="campo">
+          <label for="direccion">Dirección <span class="ayuda">(para saber a qué parte del sector corresponde)</span></label>
+          <input id="direccion" name="direccion" type="text" autocomplete="street-address">
+        </div>
+        <div class="campo">
+          <label for="contacto">Teléfono o correo</label>
+          <input id="contacto" name="contacto" type="text" required>
+        </div>
+        <div class="campo">
+          <label for="motivo">Motivo</label>
+          <select id="motivo" name="motivo">
+            <option>Consulta general</option>
+            <option>Solicitud de uso de la sede</option>
+            <option>Problema en el sector (luminarias, basura, seguridad)</option>
+            <option>Quiero participar como voluntario</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" required></textarea>
+        </div>
+        <button class="boton" type="submit">Preparar mensaje</button>
+        <div class="mensaje mensaje--info" id="aviso-contacto" hidden></div>
+      </form>
+
+      <aside class="tarjeta">
+        <h3>Datos de la sede</h3>
+        <p id="datos-sede"></p>
+        <h3>¿Cómo funciona este formulario?</h3>
+        <p>El sitio no guarda tus datos en ningún servidor: al enviar, se abre tu propio correo con
+           el texto listo. Así la directiva recibe el mensaje en su casilla habitual y nadie más
+           tiene acceso a lo que escribes.</p>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/plantilla.js"></script>
+<script src="assets/js/datos.js"></script>
+<script src="assets/js/paginas.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var c = window.CONFIG.contacto;
+    document.getElementById("datos-sede").innerHTML =
+      c.direccionSede + "<br>" + c.telefono +
+      '<br><a href="mailto:' + c.correo + '">' + c.correo + "</a><br>" + c.horarioAtencion;
+  });
+</script>
+</body>
+</html>
